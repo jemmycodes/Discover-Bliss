@@ -15,8 +15,27 @@
   </head>
   <body>
     <main>
-      <section id="map" class="w-screen h-screen overflow-hidden"></section>
-    </main>
+      <header class="top-0 z-10 p-4">
+        <div class="flex items-center justify-between">
+          <h1 class="text-2xl font-bold">Discover Bliss</h1>
+          <span class="relative cursor-pointer "> 
+<div class="absolute right-0 p-[0.55rem] bg-black rounded-r-md">
+  <img src="./search.svg"  width="25" height="25" alt="">
+</div>
+            <input type="text" class="px-5 py-2 border-2 border-black rounded-md w-72" placeholder="Enter a location" />
+          </span>
+        </header>
+      </div>
+      <section
+        id="map"
+        class="absolute z-0 w-screen h-screen overflow-hidden"
+      ></section>
+      <footer class="bottom-0 px-6 py-4 text-sm font-bold">
+        <div>
+          <p>&copy; 2023 Chef Meemah. All Rights Reserved.</p>
+        </div>
+      </footer>
+    </main>y
     <script type="module" src="/src/main.ts"></script>
   </body>
 </html>

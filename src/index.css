@@ -1,3 +1,15 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  footer,
+  header {
+    @apply fixed  w-screen bg-white/80;
+  }
+
+  footer div,
+  header div {
+    @apply max-w-5xl mx-auto;
+  }
+}
