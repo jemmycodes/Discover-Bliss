@@ -4,6 +4,7 @@ const loadingContainer = document.getElementById("loading-screen");
 let errorText = document.getElementById("error-text")?.textContent;
 const errorScreen = document.getElementById("error-screen");
 
+// initialise map
 const getMap = (coords: L.LatLngTuple) => {
   const map = L.map("map").setView(coords, 13);
   L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
@@ -13,6 +14,7 @@ const getMap = (coords: L.LatLngTuple) => {
   L.marker(coords).addTo(map);
 };
 
+// get user's loaction with geolocation API
 const getUserCoordinates = async () => {
   try {
     const { latitude, longitude } = await new Promise<GeolocationCoordinates>(

@@ -14,38 +14,51 @@
     <title>Discover Bliss</title>
   </head>
   <body>
-    <main class="min-h-screen flex justify-center items-center">
+    <main class="flex items-center justify-center min-h-screen">
+      <!-- header -->
       <header class="top-0 z-10 p-4">
         <div class="flex items-center justify-between">
           <h1 class="text-2xl font-bold">Discover Bliss</h1>
-          <span class="relative cursor-pointer "> 
-<div class="absolute right-0 p-[0.55rem] bg-black rounded-r-md">
-  <img src="./search.svg"  width="25" height="25" alt="">
-</div>
-            <input type="text" class="px-5 py-2 border-2 border-black rounded-md w-72" placeholder="Enter a location" />
+          <span class="relative cursor-pointer">
+            <div class="absolute right-0 p-[0.55rem] bg-black rounded-r-md">
+              <img src="./search.svg" width="25" height="25" alt="" />
+            </div>
+            <input
+              type="text"
+              class="px-5 py-2 border-2 border-black rounded-md w-72"
+              placeholder="Enter a location"
+            />
           </span>
-        </header>
-      </div>
+        </div>
+      </header>
 
-      <figure class=" flex-col justify-center items-center hidden" id="error-screen">
-        <img src="/error.svg" width="250" height="250" alt="Network Error">
+      <!-- error element -->
+      <figure
+        class="flex-col items-center justify-center hidden"
+        id="error-screen"
+      >
+        <img src="/error.svg" width="250" height="250" alt="Network Error" />
         <p class="text-xl font-bold" id="error-text">User denied Geolocation</p>
       </figure>
 
-<figure id="loading-screen" class="block">
-  <img src="/loading.gif" width="200" height="200" alt="Getting map...">
-</figure>
+      <!-- laoding screen -->
+      <figure id="loading-screen" class="block">
+        <img src="/loading.gif" width="200" height="200" alt="Getting map..." />
+      </figure>
 
+      <!-- map container -->
       <section
         id="map"
         class="absolute z-0 w-screen h-screen overflow-hidden"
       ></section>
+
+      <!-- footer -->
       <footer class="bottom-0 px-6 py-4 text-sm font-bold">
         <div>
           <p>&copy; 2023 Chef Meemah. All Rights Reserved.</p>
         </div>
       </footer>
-    </main>y
+    </main>
     <script type="module" src="/src/main.ts"></script>
   </body>
 </html>
