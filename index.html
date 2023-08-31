@@ -14,7 +14,7 @@
     <title>Discover Bliss</title>
   </head>
   <body>
-    <main>
+    <main class="min-h-screen flex justify-center items-center">
       <header class="top-0 z-10 p-4">
         <div class="flex items-center justify-between">
           <h1 class="text-2xl font-bold">Discover Bliss</h1>
@@ -26,6 +26,16 @@
           </span>
         </header>
       </div>
+
+      <figure class=" flex-col justify-center items-center hidden" id="error-screen">
+        <img src="/error.svg" width="250" height="250" alt="Network Error">
+        <p class="text-xl font-bold" id="error-text">User denied Geolocation</p>
+      </figure>
+
+<figure id="loading-screen" class="block">
+  <img src="/loading.gif" width="200" height="200" alt="Getting map...">
+</figure>
+
       <section
         id="map"
         class="absolute z-0 w-screen h-screen overflow-hidden"
