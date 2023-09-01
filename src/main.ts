@@ -5,6 +5,7 @@ let errorText = document.getElementById("error-text")?.textContent;
 const loadingContainer = document.getElementById("loading-screen");
 
 type Coordinates = [number, number];
+errorText = "";
 
 const initializerFunc = async (): Promise<void> => {
   try {
