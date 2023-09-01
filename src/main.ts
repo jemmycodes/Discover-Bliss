@@ -1,11 +1,45 @@
 import * as L from "leaflet";
 
-const loadingContainer = document.getElementById("loading-screen");
-let errorText = document.getElementById("error-text")?.textContent;
 const errorScreen = document.getElementById("error-screen");
+let errorText = document.getElementById("error-text")?.textContent;
+const loadingContainer = document.getElementById("loading-screen");
 
-// initialise map
-const getMap = (coords: L.LatLngTuple) => {
+type Coordinates = [number, number];
+
+const initializerFunc = async (): Promise<void> => {
+  try {
+    const coords = await getUserCoords();
+    coords && getMap(coords);
+  } catch (error) {
+    showError(`An error occured: ${error}`);
+    console.error(error);
+  } finally {
+    hideLoading();
+  }
+};
+
+const hideLoading = (): void => {
+  loadingContainer?.classList.remove("block");
+  loadingContainer?.classList.add("hidden");
+};
+
+const showError = (message: string): void => {
+  errorText = message;
+  errorScreen?.classList.remove("hidden");
+  errorScreen?.classList.add("flex");
+};
+
+const getUserPosition = (): Promise<GeolocationPosition> => {
+  return new Promise<GeolocationPosition>((resolve, reject) => {
+    navigator.geolocation.getCurrentPosition(
+      (position) => resolve(position),
+      (error) => reject(error),
+      { enableHighAccuracy: true }
+    );
+  });
+};
+
+const getMap = (coords: Coordinates): void => {
   const map = L.map("map").setView(coords, 13);
   L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
     maxZoom: 19,
@@ -14,30 +48,16 @@ const getMap = (coords: L.LatLngTuple) => {
   L.marker(coords).addTo(map);
 };
 
-// get user's loaction with geolocation API
-const getUserCoordinates = async () => {
+const getUserCoords = async (): Promise<Coordinates | undefined> => {
   try {
-    const { latitude, longitude } = await new Promise<GeolocationCoordinates>(
-      (resolve, reject) => {
-        navigator.geolocation.getCurrentPosition(
-          (position) => resolve(position.coords),
-          (error) => reject(error.message),
-          { maximumAge: 0 }
-        );
-      }
-    );
-    getMap([latitude, longitude]);
+    const position = await getUserPosition();
+    const { latitude, longitude } = position.coords;
+    return [latitude, longitude];
   } catch (error) {
-    errorScreen?.classList.remove("hidden");
-    errorScreen?.classList.add("flex");
-    error = error ? errorText : null;
-    console.error(error);
-  } finally {
-    loadingContainer?.classList.remove("block");
-    loadingContainer?.classList.add("hidden");
+    error instanceof GeolocationPositionError &&
+      showError(error.message || "An error occured while getting coordinates");
+    return;
   }
 };
 
-(async () => {
-  await getUserCoordinates();
-})();
+window.addEventListener("load", initializerFunc);
