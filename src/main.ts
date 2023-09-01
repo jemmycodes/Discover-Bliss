@@ -1,11 +1,11 @@
 import * as L from "leaflet";
 
 const errorScreen = document.getElementById("error-screen");
-let errorText = document.getElementById("error-text")?.textContent;
+let errorText = document.getElementById("error-text")!.textContent;
 const loadingContainer = document.getElementById("loading-screen");
 
+console.log(errorText); // to prevent production error
 type Coordinates = [number, number];
-errorText = "";
 
 const initializerFunc = async (): Promise<void> => {
   try {
